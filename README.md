@@ -1,6 +1,6 @@
 # Ethereum Balance Checker
 
-A full-stack application that allows users to check Ethereum token balances for any given address. Built with React, TypeScript, and Express.
+A full-stack application that allows users to check Ethereum token balances for any given address. Balances will be shown for ETH, USDC, and LINK on Ethereum mainnet. Built with React, TypeScript, and Express.
 
 ## Project Structure
 
@@ -71,4 +71,3 @@ The frontend application will run on `http://localhost:5173`
   - TypeScript
   - Viem (Ethereum interaction)
   - dotenv
-  
