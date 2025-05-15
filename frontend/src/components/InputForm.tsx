@@ -17,7 +17,7 @@ const isValidETHAddress = (address: string): boolean => {
   return hexRegex.test(address);
 };
 
-const ETHAddressForm = ({ onSubmit }: ETHAddressFormProps) => {
+const InputForm = ({ onSubmit }: ETHAddressFormProps) => {
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
 
@@ -40,7 +40,7 @@ const ETHAddressForm = ({ onSubmit }: ETHAddressFormProps) => {
 
   return (
     <Card variant="outlined" sx={{ maxWidth: 600, mx: 'auto', my: 2 }}>
-      <Box sx={{ p: 2 }}>
+      <Box sx={{ p: 3 }}>
         <Typography variant="h5" component="h2" gutterBottom>
           Enter ETH Address
         </Typography>
@@ -80,4 +80,4 @@ const ETHAddressForm = ({ onSubmit }: ETHAddressFormProps) => {
   );
 };
 
-export default ETHAddressForm; 
+export default InputForm; 

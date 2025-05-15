@@ -27,7 +27,7 @@ const BalanceCard = ({ balanceResponse }: BalanceCardProps) => {
       role="region"
       variant="outlined"
     >
-      <Box sx={{ p: 1 }}>
+      <Box sx={{ p: 2 }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography>
             {token}
