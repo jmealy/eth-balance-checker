@@ -10,14 +10,34 @@ interface BalanceCardProps {
   balanceResponse: BalanceResponse;
 }
 
+function formatBalance(value: number | string): string {
+  const numValue = typeof value === 'string' ? Number(value) : value;
+
+  if (numValue === 0) return "0";
+  
+  // Split number into whole and decimal parts
+  const [wholePart, decimalPart] = numValue.toString().split('.');
+
+  // Format whole number part with thousands separators
+  const formattedWhole = Number(wholePart).toLocaleString('en-US');
+
+  // If no decimal part, return just the whole number
+  if (!decimalPart) return formattedWhole;
+
+  // Format decimal part to 4 significant digits
+  const decimalNum = Number(`0.${decimalPart}`);
+  const formattedDecimal = decimalNum.toPrecision(4)
+    .replace('0.', '')
+    .replace(/\.?0+$/, '');
+
+  return `${formattedWhole}.${formattedDecimal}`;
+}
+
+
 const BalanceCard = ({ balanceResponse }: BalanceCardProps) => {
   const { token, balance } = balanceResponse;
 
-  // Format balance with commas and up to 8 decimals
-  const formattedBalance =
-    typeof balance === 'number'
-      ? balance.toLocaleString(undefined, { maximumFractionDigits: 8 })
-      : Number(balance).toLocaleString(undefined, { maximumFractionDigits: 8 });
+  const formattedBalance = formatBalance(balance);
 
   return (
     <Card
@@ -32,12 +52,12 @@ const BalanceCard = ({ balanceResponse }: BalanceCardProps) => {
           <Typography>
             {token}
           </Typography>
-        <Typography
-          fontWeight={700}
-          aria-label={`Balance: ${formattedBalance}`}
-        >
-          {formattedBalance}
-        </Typography>
+          <Typography
+            fontWeight={700}
+            aria-label={`Balance: ${formattedBalance}`}
+          >
+            {formattedBalance}
+          </Typography>
         </Box>
       </Box>
     </Card>
