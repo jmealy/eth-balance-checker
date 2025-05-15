@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { getAllBalances } from './services/balance';
+import { isAddress } from 'viem';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -15,11 +16,11 @@ app.use(express.json());
 
 const getBalancesHandler: express.Handler = async (req, res) => {
   const { address } = req.body;
-  
-  if (!address) {
+
+  if (!isAddress(address)) {
     return res.status(400).json({
       error: 'Bad Request',
-      details: 'Address is required'
+      details: 'Invalid Ethereum address format'
     });
   }
 

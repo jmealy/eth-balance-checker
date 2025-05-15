@@ -1,4 +1,4 @@
-import { createPublicClient, http, formatEther, formatUnits, Address, parseAbi } from 'viem';
+import { createPublicClient, http, formatEther, formatUnits, Address, parseAbi, isAddress } from 'viem';
 import { mainnet } from 'viem/chains';
 
 const client = createPublicClient({
