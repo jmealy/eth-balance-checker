@@ -2,7 +2,7 @@ import './App.css'
 import ETHAddressForm from './components/ETHAddressForm'
 import { useState } from 'react'
 import { fetchBalances } from './services/balanceService'
-import { Card, CardContent, Typography, Box } from '@mui/material'
+import { Card, Typography, Box } from '@mui/material'
 import BalanceCard from './components/BalanceCard'
 import type { BalanceResponse } from './components/BalanceCard'
 
@@ -27,7 +27,11 @@ function App() {
   };
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
+    <Box sx={{ 
+      maxWidth: 600, 
+      mx: 'auto', 
+      p: 2
+    }}>
       <ETHAddressForm onSubmit={handleSubmit} />
       {loading && (
         <Typography sx={{ mt: 2, textAlign: 'center' }}>
@@ -36,15 +40,15 @@ function App() {
       )}
       {error && (
         <Card variant="outlined" sx={{ mt: 2, bgcolor: '#fff3f3' }}>
-          <CardContent>
+          <Box sx={{ p: 1 }}>
             <Typography color="error">
               {error}
             </Typography>
-          </CardContent>
+          </Box>
         </Card>
       )}
       {balances && !error && (
-        <Box sx={{ mt: 2 }}>
+        <Box>
           {balances.map((balanceResponse, idx) => (
             <BalanceCard key={balanceResponse.token + idx} balanceResponse={balanceResponse} />
           ))}

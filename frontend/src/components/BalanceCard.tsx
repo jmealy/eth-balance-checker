@@ -1,5 +1,4 @@
-import React from 'react';
-import { Card, CardContent, Typography, Chip, Box } from '@mui/material';
+import { Card, Typography, Box } from '@mui/material';
 
 export type BalanceResponse = {
   token: string;
@@ -12,7 +11,7 @@ interface BalanceCardProps {
 }
 
 const BalanceCard = ({ balanceResponse }: BalanceCardProps) => {
-  const { token, balance, tokenName } = balanceResponse;
+  const { token, balance } = balanceResponse;
 
   // Format balance with commas and up to 8 decimals
   const formattedBalance =
@@ -28,7 +27,7 @@ const BalanceCard = ({ balanceResponse }: BalanceCardProps) => {
       role="region"
       variant="outlined"
     >
-      <CardContent>
+      <Box sx={{ p: 1 }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography>
             {token}
@@ -40,7 +39,7 @@ const BalanceCard = ({ balanceResponse }: BalanceCardProps) => {
           {formattedBalance}
         </Typography>
         </Box>
-      </CardContent>
+      </Box>
     </Card>
   );
 };

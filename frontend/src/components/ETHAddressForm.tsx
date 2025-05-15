@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, TextField, Box, Button } from '@mui/material';
+import { Card, Typography, TextField, Box, Button } from '@mui/material';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 
@@ -40,7 +40,7 @@ const ETHAddressForm = ({ onSubmit }: ETHAddressFormProps) => {
 
   return (
     <Card variant="outlined" sx={{ maxWidth: 600, mx: 'auto', my: 2 }}>
-      <CardContent>
+      <Box sx={{ p: 3 }}>
         <Typography variant="h5" component="h2" gutterBottom>
           Enter ETH Address
         </Typography>
@@ -75,7 +75,7 @@ const ETHAddressForm = ({ onSubmit }: ETHAddressFormProps) => {
             Submit
           </Button>
         </Box>
-      </CardContent>
+      </Box>
     </Card>
   );
 };
