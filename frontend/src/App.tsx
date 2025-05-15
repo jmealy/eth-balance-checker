@@ -1,8 +1,8 @@
 import './App.css'
-import ETHAddressForm from './components/ETHAddressForm'
+import AddressInputForm from './components/AddressInputForm'
 import { useState } from 'react'
 import { fetchBalances } from './services/balanceService'
-import { Card, Typography, Box } from '@mui/material'
+import { Card, Typography, Box, CircularProgress } from '@mui/material'
 import BalanceCard from './components/BalanceCard'
 import type { BalanceResponse } from './components/BalanceCard'
 
@@ -32,11 +32,11 @@ function App() {
       mx: 'auto', 
       p: 2
     }}>
-      <ETHAddressForm onSubmit={handleSubmit} />
+      <AddressInputForm onSubmit={handleSubmit} />
       {loading && (
-        <Typography sx={{ mt: 2, textAlign: 'center' }}>
-          Loading balances...
-        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <CircularProgress sx={{ mt: 2, textAlign: 'center' }} />
+        </Box>
       )}
       {error && (
         <Card variant="outlined" sx={{ mt: 2, bgcolor: '#fff3f3' }}>

@@ -2,7 +2,7 @@ import { Card, Typography, TextField, Box, Button } from '@mui/material';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 
-interface ETHAddressFormProps {
+interface AddressInputFormProps {
   onSubmit: (address: string) => void;
 }
 
@@ -17,7 +17,7 @@ const isValidETHAddress = (address: string): boolean => {
   return hexRegex.test(address);
 };
 
-const InputForm = ({ onSubmit }: ETHAddressFormProps) => {
+const AddressInputForm = ({ onSubmit }: AddressInputFormProps) => {
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
 
@@ -40,7 +40,7 @@ const InputForm = ({ onSubmit }: ETHAddressFormProps) => {
 
   return (
     <Card variant="outlined" sx={{ maxWidth: 600, mx: 'auto', my: 2 }}>
-      <Box sx={{ p: 3 }}>
+      <Box sx={{ p: 2 }}>
         <Typography variant="h5" component="h2" gutterBottom>
           Enter ETH Address
         </Typography>
@@ -80,4 +80,4 @@ const InputForm = ({ onSubmit }: ETHAddressFormProps) => {
   );
 };
 
-export default InputForm; 
+export default AddressInputForm; 
