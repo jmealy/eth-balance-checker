@@ -1,32 +1,23 @@
-import { createPublicClient, http, formatEther, formatUnits, Address, parseAbi, isAddress } from 'viem';
+import { createPublicClient, http, formatEther, formatUnits, Address, isAddress } from 'viem';
 import { mainnet } from 'viem/chains';
+import dotenv from 'dotenv';
+import { INFURA_BASE_URL, TOKENS, TokenSymbol, ERC20_ABI } from '../config/constants';
+
+// Load environment variables
+dotenv.config();
+
+const INFURA_TOKEN = process.env.INFURA_TOKEN || '';
+
+if (!INFURA_TOKEN) {
+  throw new Error('INFURA_TOKEN is not set in environment variables');
+}
+
+const ETH_RPC_URL = `${INFURA_BASE_URL}/${INFURA_TOKEN}`;
 
 const client = createPublicClient({
   chain: mainnet,
-  transport: http()
+  transport: http(ETH_RPC_URL)
 });
-
-type TokenSymbol = 'USDC' | 'LINK';
-
-interface TokenConfig {
-  address: Address;
-  decimals: number;
-}
-
-const TOKENS: Record<TokenSymbol, TokenConfig> = {
-  USDC: {
-    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    decimals: 6
-  },
-  LINK: {
-    address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
-    decimals: 18
-  }
-};
-
-const ERC20_ABI = parseAbi([
-  'function balanceOf(address account) view returns (uint256)'
-]);
 
 interface BalanceResponse {
   address: Address;
