@@ -2,6 +2,9 @@
 
 A full-stack application that allows users to check Ethereum token balances for any given address. Balances will be shown for ETH, USDC, and LINK on Ethereum mainnet. Built with React, TypeScript, and Express.
 
+![image](https://github.com/user-attachments/assets/55a26c9d-33c0-47e5-aee2-42fbdd1e2f90)
+
+
 ## Project Structure
 
 ```
