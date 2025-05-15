@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { getEthereumBalance } from './services/balance';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -12,15 +13,18 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const getBalancesHandler: express.Handler = (req, res) => {
-  const { message } = req.body;
+const getBalancesHandler: express.Handler = async (req, res) => {
+  const { address } = req.body;
   
-  if (!message || typeof message !== 'string') {
-    res.status(400).json({ error: 'Please provide a string message in the request body' });
-    return;
+  try {
+    const balanceData = await getEthereumBalance(address);
+    res.json(balanceData);
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Failed to fetch balance',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
-
-  res.json({ message });
 };
 
 app.post('/api/balance', getBalancesHandler);
