@@ -15,7 +15,14 @@ app.use(cors());
 app.use(express.json());
 
 const getBalancesHandler: express.Handler = async (req, res) => {
-  const { address } = req.body;
+  const { address } = req.query;
+
+  if (!address || typeof address !== 'string') {
+    return res.status(400).json({
+      error: 'Bad Request',
+      details: 'Address query parameter is required'
+    });
+  }
 
   if (!isAddress(address)) {
     return res.status(400).json({
@@ -36,7 +43,7 @@ const getBalancesHandler: express.Handler = async (req, res) => {
   }
 };
 
-app.post('/api/balance', getBalancesHandler);
+app.get('/api/balance', getBalancesHandler);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
